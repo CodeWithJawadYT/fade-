@@ -7,7 +7,6 @@
       Fade District Barbershop | Premium Fades &amp; Grooming in Kingston,
       Ontario
     </title>
-    <link rel="shortcut icon" href="images/fade_master.jpg" type="image/x-icon">
     <meta
       name="description"
       content="Fade District Barbershop in Kingston, Ontario. Premium haircuts, skin fades, beard work and hot towel grooming in a clean private studio. Book by WhatsApp or email. Closed Tuesdays."
@@ -1526,6 +1525,34 @@
             e.preventDefault();
             go(b.getAttribute("data-go"), true);
           });
+        });
+        function setMenu(open) {
+          menu.classList.toggle("show", open);
+          burger.classList.toggle("open", open);
+          burger.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+        burger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          setMenu(!menu.classList.contains("show"));
+        });
+        document.addEventListener("click", function (e) {
+          if (
+            menu.classList.contains("show") &&
+            !menu.contains(e.target) &&
+            !burger.contains(e.target)
+          ) {
+            setMenu(false);
+          }
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            setMenu(false);
+          }
+        });
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 860) {
+            setMenu(false);
+          }
         });
         window.addEventListener("popstate", function () {
           go((location.hash || "#home").slice(1), false);
