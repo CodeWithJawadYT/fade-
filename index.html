@@ -58,7 +58,7 @@
         "logo": "images/fade_master.jpg",
         "slogan": "Crafting Confidence in Every Cut",
         "telephone": "+16138935650",
-        "email": "fadedistrict75.com",
+        "email": "fadedistrict75@gmail.com",
         "priceRange": "$20 - $65",
         "currenciesAccepted": "CAD",
         "paymentAccepted": "Cash, E-Transfer",
@@ -488,6 +488,7 @@
         background: transparent;
         color: var(--cyan);
         transition: 0.3s;
+        display: inline-block;
       }
       .btn:hover {
         background: rgba(0, 240, 255, 0.12);
@@ -872,7 +873,13 @@
               Come get cleaned up and leave looking sharp and feeling confident.
             </p>
             <div class="cta">
-              <button class="btn solid" data-go="booking">Book Now</button>
+              <a
+                class="btn solid book-now-wa"
+                href="https://wa.me/16138935650?text=Hello!%20I%20would%20like%20to%20book%20an%20appointment."
+                target="_blank"
+                rel="noopener"
+                >Book Now</a
+              >
               <button class="btn" data-go="services">View Services</button>
             </div>
             <div class="notice">
@@ -1125,7 +1132,6 @@
       <div class="page" id="booking">
         <section>
           <div class="wrap">
-            <p class="eyebrow">Page 05</p>
             <h2>Book Your <span class="neon">Appointment</span></h2>
             <div class="grid g2">
               <form class="card rv" id="bookForm" novalidate>
