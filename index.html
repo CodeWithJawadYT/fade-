@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -819,6 +820,9 @@
           transition: none !important;
         }
       }
+
+      /* Booking modal — preserve Fade District's dark cyber-luxury system. */
+      .booking-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1.25rem;background:rgba(3,5,8,.78);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity 220ms cubic-bezier(.23,1,.32,1),visibility 220ms}.booking-modal.is-open{opacity:1;visibility:visible}.booking-dialog{position:relative;width:min(720px,100%);max-height:min(680px,calc(100vh - 2.5rem));overflow:auto;padding:clamp(1.35rem,4vw,2.4rem);border:1px solid rgba(0,240,255,.42);border-radius:18px;background:linear-gradient(145deg,rgba(0,240,255,.09),transparent 34%),linear-gradient(180deg,rgba(18,21,28,.98),rgba(8,10,14,.98));box-shadow:0 24px 90px rgba(0,0,0,.72),0 0 42px rgba(0,240,255,.18);transform:translateY(16px) scale(.96);transition:transform 260ms cubic-bezier(.23,1,.32,1)}.booking-modal.is-open .booking-dialog{transform:translateY(0) scale(1)}.booking-dialog:before{content:"";position:absolute;inset:.8rem;border:1px solid rgba(245,197,107,.12);border-radius:12px;pointer-events:none}.booking-dialog-head{position:relative;padding-right:3rem;margin-bottom:1.35rem}.booking-dialog-head h2{margin:.35rem 0 .45rem;font-size:clamp(1.25rem,4vw,2rem)}.booking-dialog-head p{max-width:48ch}.modal-close{position:absolute;top:0;right:0;z-index:2;width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;color:var(--cyan);background:rgba(0,240,255,.05);font:600 1.2rem/1 var(--font-b);cursor:pointer;transition:180ms cubic-bezier(.23,1,.32,1)}.modal-close:hover{color:#04121a;background:var(--cyan);box-shadow:0 0 24px rgba(0,240,255,.45);transform:rotate(90deg)}.booking-options{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}.booking-option{min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:1rem;padding:1.05rem;border:1px solid rgba(147,166,174,.25);border-radius:13px;background:rgba(6,8,12,.66);color:var(--text);text-align:left;transition:transform 180ms cubic-bezier(.23,1,.32,1),border-color 180ms,box-shadow 180ms,background 180ms}.booking-option:hover{transform:translateY(-4px);border-color:var(--cyan);background:rgba(0,240,255,.08);box-shadow:0 16px 32px -20px rgba(0,240,255,.75)}.booking-option:active{transform:translateY(-1px) scale(.98)}.booking-option.whatsapp:hover{border-color:#25d366;box-shadow:0 16px 32px -20px rgba(37,211,102,.72)}.booking-option.email:hover{border-color:var(--gold);box-shadow:0 16px 32px -20px rgba(245,197,107,.72)}.booking-option.instagram:hover{border-color:#e1306c;box-shadow:0 16px 32px -20px rgba(225,48,108,.72)}.booking-option-icon{width:36px;height:36px;display:grid;place-items:center;border:1px solid currentColor;border-radius:10px;font-family:var(--font-h);font-size:.8rem}.whatsapp .booking-option-icon{color:#25d366}.email .booking-option-icon{color:var(--gold)}.instagram .booking-option-icon{color:#ff6e9a}.booking-option h3{margin-top:.75rem;color:inherit;font-size:.86rem}.booking-option p{color:var(--muted);font-size:.95rem;line-height:1.35}.booking-option-arrow{align-self:flex-end;color:var(--cyan);font-family:var(--font-h);font-size:1.1rem}.booking-dialog-foot{position:relative;margin-top:1.15rem;color:var(--muted);font-size:.82rem;letter-spacing:.4px}body.modal-open{overflow:hidden}@media(max-width:640px){.booking-dialog{max-height:calc(100vh - 1.5rem);padding:1.25rem;border-radius:14px}.booking-dialog:before{inset:.55rem}.booking-options{grid-template-columns:1fr}.booking-option{min-height:auto;flex-direction:row;align-items:center;gap:.8rem;padding:.9rem}.booking-option>div:nth-child(2){flex:1}.booking-option h3{margin-top:0}.booking-option p{font-size:.88rem}}@media(prefers-reduced-motion:reduce){.booking-modal,.booking-dialog,.booking-option,.modal-close{transition:none}}
     </style>
   </head>
   <body>
@@ -873,13 +877,7 @@
               Come get cleaned up and leave looking sharp and feeling confident.
             </p>
             <div class="cta">
-              <a
-                class="btn solid book-now-wa"
-                href="https://wa.me/16138935650?text=Hello!%20I%20would%20like%20to%20book%20an%20appointment."
-                target="_blank"
-                rel="noopener"
-                >Book Now</a
-              >
+              <button class="btn solid book-now-trigger" id="heroBookNow" type="button" aria-haspopup="dialog" aria-controls="bookingModal">Book Now</button>
               <button class="btn" data-go="services">View Services</button>
             </div>
             <div class="notice">
@@ -1274,6 +1272,18 @@
         </p>
       </div>
     </footer>
+
+    <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" aria-hidden="true">
+      <div class="booking-dialog" role="document">
+        <button class="modal-close" id="bookingModalClose" type="button" aria-label="Close booking options">&times;</button>
+        <div class="booking-dialog-head"><span class="eyebrow">Direct line · Kingston</span><h2 id="bookingModalTitle">Choose your <span class="neon">booking channel</span></h2><p class="muted">Reach the chair directly through the channel that works best for you.</p></div>
+        <div class="booking-options">
+          <a class="booking-option whatsapp" href="https://wa.me/16138935650?text=Hello!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer"><div class="booking-option-icon" aria-hidden="true">WA</div><div><h3>Via WhatsApp</h3><p>Message us directly to find your time.</p></div><span class="booking-option-arrow" aria-hidden="true">↗</span></a>
+          <a class="booking-option email" href="mailto:fadedistrict75@gmail.com?subject=Booking%20Request%20%E2%80%94%20Fade%20District"><div class="booking-option-icon" aria-hidden="true">@</div><div><h3>Mail Us</h3><p>Send your appointment request by email.</p></div><span class="booking-option-arrow" aria-hidden="true">↗</span></a>
+          <a class="booking-option instagram" href="https://www.instagram.com/fade.district__?igsh=MTFuMmxranFiZHJ6ag==" target="_blank" rel="noopener noreferrer"><div class="booking-option-icon" aria-hidden="true">IG</div><div><h3>DM on Instagram</h3><p>Open the official profile and send a DM.</p></div><span class="booking-option-arrow" aria-hidden="true">↗</span></a>
+        </div><p class="booking-dialog-foot">Closed Tuesdays · Cash &amp; E-Transfer only</p>
+      </div>
+    </div>
     <a
       class="wa"
       href="https://wa.me/16138935650"
@@ -1292,6 +1302,12 @@
         "use strict";
         var PHONE = "16138935650",
           MAIL = "fadedistrict75@gmail.com";
+        var INSTAGRAM = "https://www.instagram.com/fade.district__?igsh=MTFuMmxranFiZHJ6ag==";
+        var bookingModal = document.getElementById("bookingModal"), heroBookNow = document.getElementById("heroBookNow"), bookingModalClose = document.getElementById("bookingModalClose"), lastBookingTrigger = null;
+        function closeBookingModal(){bookingModal.classList.remove("is-open");bookingModal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");if(lastBookingTrigger)lastBookingTrigger.focus()}
+        function openBookingModal(){lastBookingTrigger=document.activeElement;bookingModal.classList.add("is-open");bookingModal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");window.setTimeout(function(){bookingModalClose.focus()},30)}
+        heroBookNow.addEventListener("click",openBookingModal); bookingModalClose.addEventListener("click",closeBookingModal); bookingModal.addEventListener("click",function(e){if(e.target===bookingModal)closeBookingModal()});
+        document.addEventListener("keydown",function(e){if(e.key==="Escape"&&bookingModal.classList.contains("is-open"))closeBookingModal()});
         var SERVICES = [
           {
             n: "The Signature Groom",
